@@ -40,10 +40,9 @@ app.use(express.static('build'))
 
 app.get('/', (req,res) =>{
 
-    console.log("Lataa react")
+
     res.sendFile(path.join(__dirname+'/build/index.html'));
-    console.log(__dirname)
-    console.log("Ladattu")
+  
    
   });
   
