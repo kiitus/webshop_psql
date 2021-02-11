@@ -1,0 +1,8 @@
+POST http://localhost:3001/orderBack/
+Content-Type: application/json
+
+{
+"name":"Teemu",
+"number":"11241",
+"items":[{"text":"Kahvi","price":2.5,"amount":4},{"text":"Peruna","price":1,"amount":10}]
+}
