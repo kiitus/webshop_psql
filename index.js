@@ -4,6 +4,8 @@ const Product = require("./models/Product")
 const Order = require("./models/Order")
 const OrderItem = require("./models/OrderItem")
 
+const path = require('path');
+
 const cors = require('cors')
 require('dotenv').config()
 
@@ -25,13 +27,26 @@ const db = require("./config/database")
 app.use(express.json())
 app.use(cors())
 
-app.get("/",(req,res)=>{res.send("Toimii")})
+//app.get("/",(req,res)=>{res.send("Toimii")})
 
 app.use("/productBack",productRouter)
 app.use("/orderBack", orderRouter)
 
 const PORT= process.env.PORT || 3001
 
+
+app.use(express.static('build'))
+
+
+app.get('/', (req,res) =>{
+
+    console.log("Lataa react")
+    res.sendFile(path.join(__dirname+'/build/index.html'));
+    console.log(__dirname)
+    console.log("Ladattu")
+   
+  });
+  
 app.listen(PORT,db.sync().then(()=>{
     console.log("Server started on port "+PORT)
     console.log("Product table created")

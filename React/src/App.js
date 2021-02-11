@@ -19,8 +19,12 @@ const [items, setItems] = useState([])
 const [order, setOrder] = useState([])
 const [sendedOrders,setSendedOrders] = useState([])
 
-const adress = "http://localhost:3001/productBack/"
-const adressOrder = "http://localhost:3001/orderBack/"
+//const adress = "http://localhost:3001/productBack/"
+//const adressOrder = "http://localhost:3001/orderBack/"
+
+
+const adress = "/productBack/"
+const adressOrder = "/orderBack/"
 
 
 useEffect(() => {
