@@ -8,10 +8,17 @@ require('dotenv').config()
   dialect: 'postgres'
 });*/
 
-module.exports =  new Sequelize(process.env.DATABASE_URL, {
+/*module.exports =  new Sequelize("dflgha1dnv2mj0","svcjxbgyljqcfb","26a8034296e464ad6360e1c924e5ae62e92fd09ff2b60060f6e5e479ee86b01e",
+  {
+  host:"ec2-108-128-104-50.eu-west-1.compute.amazonaws.com",
   dialect: 'postgres',
   protocol: 'postgres',
-  ssl: {
-    rejectUnauthorized: false
-  }
-})
+  ssl: { rejectUnauthorized: false }
+})*/
+
+module.exports =  new Sequelize(process.env.DATABASE_URL,
+  {
+  dialect: 'postgres',
+  protocol: 'postgres',
+  //ssl: { rejectUnauthorized: false }})
+  })
