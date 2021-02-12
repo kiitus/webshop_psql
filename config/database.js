@@ -16,10 +16,19 @@ require('dotenv').config()
   ssl: { rejectUnauthorized: false }
 })*/
 
-module.exports =  new Sequelize(process.env.DATABASE_URL,
+/*module.exports =  new Sequelize(process.env.DATABASE_URL,
   {
   dialect: 'postgres',
   protocol: 'postgres',
   //ssl: { rejectUnauthorized: false }})
-  })
+  }) */
+
+  sequelize = new Sequelize(process.env.DATABASE_URL, {
+    logging: false,
+    dialectOptions: {
+      ssl: true /* for SSL config since Heroku gives you this out of the box */
+    }
+  });
+  
+
   
