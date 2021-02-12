@@ -22,3 +22,4 @@ module.exports =  new Sequelize(process.env.DATABASE_URL,
   protocol: 'postgres',
   //ssl: { rejectUnauthorized: false }})
   })
+  
