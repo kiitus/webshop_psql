@@ -24,7 +24,7 @@ require('dotenv').config()
   }) */
 
   sequelize = new Sequelize(process.env.DATABASE_URL, {
-    logging: false,
+    //logging: false,
     dialectOptions: {
       ssl: true /* for SSL config since Heroku gives you this out of the box */
     }
