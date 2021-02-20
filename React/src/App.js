@@ -6,6 +6,7 @@ import {useState, useEffect} from "react"
 import Order from "./components/Order";
 import Info from "./components/Info"
 import ProductDetails from "./components/ProductDetails"
+import Footer from "./components/Footer"
 
 import SearchItems from "./components/SearchItems"
 import {BrowserRouter as Router, Link, Route, Switch} from "react-router-dom"
@@ -203,9 +204,25 @@ const filterFunctio = (filterText)=>
    setSearchedItems(filtered)
    */
  
+   const containerWholePage =
+   {
+    position: "relative",
+    minHeight: "92vh"
+   }
+   const containerOtherThanFooter=
+   {
+    paddingBottom: "2.5rem"
+   }
+   const footer = {
+    position: "absolute",
+    bottom: "0",
+    width: "100%",
+    height: "2.5rem"
+   }
 
   return (
-    <div className="container">
+    <div className="container" style={containerWholePage}>
+    <div style ={containerOtherThanFooter}>
     <Header />
     <Router>
     <Link to="/" className="p-2">Products</Link>
@@ -231,8 +248,15 @@ const filterFunctio = (filterText)=>
     <Route path="/Product/:id">
       <ProductDetails products={items}/>
     </Route>
+    <Route path="/">
+      <Info text="Error in site adress"/>
+    </Route>
     </Switch>
      </Router>
+     </div>
+     <div style={footer}>
+     <Footer text="This site is made using React,Axios, Node.js(express), Sequelize and PostgreSQL." />
+     </div>
     </div>
    
   );

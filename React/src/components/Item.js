@@ -1,7 +1,7 @@
 import React from 'react'
 import {FaTimes} from "react-icons/fa"
 import {useState} from "react"
-import {BrowserRouter as Router, Link} from "react-router-dom"
+import {Link} from "react-router-dom"
 
 const Item = ({item,deleteItem,addToOrder}) => {
 

@@ -13,6 +13,15 @@ productRouter.get("/",(req,res)=>
     })
 })
 
+productRouter.get("/id/:id",(req,res)=>
+{
+    let id = req.params.id
+
+    Product.findOne({ where: { id} }).then((result)=>{
+        res.send(result)
+    })
+})
+
 productRouter.get("/:search",(req,res)=>
 {
     let search = req.params.search
