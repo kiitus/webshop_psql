@@ -2,6 +2,10 @@ const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require("../config/database")
 //const sequelize = new Sequelize('sqlite::memory:');
 
+
+//Products that are on sale
+
+
 const Product = sequelize.define('Product', {
   // Model attributes are defined here
   text: {

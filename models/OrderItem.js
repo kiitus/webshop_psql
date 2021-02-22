@@ -3,6 +3,10 @@ const sequelize = require("../config/database")
 const Order = require("./Order")
 //const sequelize = new Sequelize('sqlite::memory:');
 
+
+//Items that belong to order
+
+
 const OrderItem = sequelize.define(`OrderItem`, {
   // Model attributes are defined here
   text: {

@@ -16,7 +16,7 @@ const app = express()
 
 
 
-const db = require("./config/database")
+const db = require("./config/database")  //connect to database
 
     db.authenticate().then(()=>{
     console.log('Connection has been established successfully.')

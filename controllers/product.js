@@ -3,6 +3,7 @@ const Product = require('../models/Product')
 const { Op, Sequelize } = require("sequelize");
 
 
+//Loads products to shop 
 productRouter.get("/",(req,res)=>
 {
 
@@ -13,6 +14,7 @@ productRouter.get("/",(req,res)=>
     })
 })
 
+//Gets one product information
 productRouter.get("/id/:id",(req,res)=>
 {
     let id = req.params.id
@@ -22,6 +24,8 @@ productRouter.get("/id/:id",(req,res)=>
     })
 })
 
+
+//Search items which include search params(*search*)
 productRouter.get("/:search",(req,res)=>
 {
     let search = req.params.search
@@ -35,6 +39,7 @@ productRouter.get("/:search",(req,res)=>
  
 })
 
+//Inserts new product to shop
 productRouter.post("/",(req,res)=>
 {
     let {text,price} = req.body
@@ -52,6 +57,7 @@ productRouter.post("/",(req,res)=>
     })
 })
 
+//Delete product from shop
 productRouter.delete("/:id",(req,res)=>
 {
     let id = req.params.id
