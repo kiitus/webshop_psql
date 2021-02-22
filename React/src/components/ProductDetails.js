@@ -18,6 +18,7 @@ import {
   //  const adress = "http://localhost:3001/productBack/"
   const adress = "/productBack/"
 
+  //Loads details about the product from database
     useEffect(() => {
      
         axios.get(`${adress}/id/${id}`).then((result)=>

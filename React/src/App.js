@@ -220,33 +220,33 @@ const filterFunctio = (filterText)=>
 
     
     <Switch>   
-      //Manage product, add, remove and include to order
+     { /*Manage product, add, remove and include to order*/}
     <Route exact path="/">  
     <SearchItems products={items} filter={filterFunctio}/>
     <Items items={items} deleteItem={deleteItemFromItems} addToOrder={addToOrder}/>
     <AddItem onClick={addItem} />
     </Route>
 
-    //Order "in-progress"
+    {/*Order "in-progress"*/}
     <Route path="/order">
     {order.length>0?
     <Order order={order} onClick={sendOrder} deleteItem={deleteItemFromOrder}/>
     :<Info text="Current order is empty"/>}  
     </Route>
 
-      //Orders that are sended to shop
+      {/*Orders that are sended to shop*/}
     <Route path="/sended_orders">
     {sendedOrders.length > 0?  
     <ReadyOrders orders={sendedOrders} deleteOrder={deleteOrder} />
     :<Info text="There are no orders made"/>}
     </Route>
 
-      //Shows details about product
+      {/*Shows details about product*/}
     <Route path="/Product/:id">
       <ProductDetails products={items}/>
     </Route>
 
-      //Error in adress
+      {/*Error in adress*/}
     <Route path="/">
       <Info text="Error in site adress"/>
     </Route>
