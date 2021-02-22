@@ -3,6 +3,8 @@ import {FaTimes} from "react-icons/fa"
 
 import ReadyOrderItems from "./ReadyOrderItems"
 
+//Includes order which are sended to the shop
+
 
 const ReadyOrder = ({order,deleteOrder}) => {
     let totalPrice = order.OrderItems.reduce((total,one) =>

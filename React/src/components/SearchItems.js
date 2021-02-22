@@ -1,6 +1,8 @@
 import React from 'react'
 import {useState} from "react"
 
+
+//Form to search items on sale.
 const SearchItems = ({products,filter}) => {
     const [text,setText] = useState("")
 

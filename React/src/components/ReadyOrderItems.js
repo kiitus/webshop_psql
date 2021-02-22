@@ -1,6 +1,6 @@
 import React from 'react'
 
-
+//Shows items in orders which are sended to shop
 
 const ReadyOrderItems = ({item}) => {
     return (

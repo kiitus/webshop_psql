@@ -3,6 +3,8 @@ import {FaTimes} from "react-icons/fa"
 import {useState} from "react"
 import {Link} from "react-router-dom"
 
+
+//Show one product and its price. You can click to remove item or add it to order
 const Item = ({item,deleteItem,addToOrder}) => {
 
     const [amount, setAmount] = useState(0)

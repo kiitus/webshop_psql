@@ -6,6 +6,10 @@ import {
   } from "react-router-dom";
   import axios from 'axios';
 
+
+  //Shows more detail about specific product 
+
+  
  const ProductDetails = () => {
     
     const [product, setProduct] = useState({})

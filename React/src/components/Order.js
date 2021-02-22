@@ -2,6 +2,9 @@ import React from 'react'
 import OrderItem from './OrderItem'
 import {useState} from "react"
 
+
+//Shows order whcih is "in-progress". Can be sended to shop. Must give orderer
+
 const Order = ({order,onClick,deleteItem}) => {
 
 

@@ -15,10 +15,10 @@ import axios from 'axios';
 
 function App() {
 
-const [items, setItems] = useState([])
-//const [searchedItems, setSearchedItems] = useState([])
-const [order, setOrder] = useState([])
-const [sendedOrders,setSendedOrders] = useState([])
+const [items, setItems] = useState([])    //Product that are listed on sale
+
+const [order, setOrder] = useState([])    //Order which is "in-progress"
+const [sendedOrders,setSendedOrders] = useState([]) //Orders which are sended to shop
 
 //const adress = "http://localhost:3001/productBack/"
 //const adressOrder = "http://localhost:3001/orderBack/"
@@ -28,7 +28,7 @@ const adress = "/productBack/"
 const adressOrder = "/orderBack/"
 
 
-useEffect(() => {
+useEffect(() => {     //Loads all products which are on sale
   axios.get(adress).then(products =>
     { 
       console.log(products.data)
@@ -38,7 +38,7 @@ useEffect(() => {
   )  
 }, [])
 
-useEffect(() => {
+useEffect(() => {     //Loads all orders which are sended to shop
   axios.get(adressOrder).then(orders =>
     { 
       console.log(orders.data)
@@ -50,7 +50,7 @@ useEffect(() => {
 
 
 
-  const addItem  = (text,price) =>{
+  const addItem  = (text,price) =>{   //Used to add product to sale
  // let id = Math.floor(Math.random() * 1000);    
    
 
@@ -70,6 +70,7 @@ useEffect(() => {
   
 }
 
+//Delete item from sale
   const deleteItemFromItems = (id) =>
   {
     axios.delete(adress+`${id}`).then((msg)=>
@@ -80,14 +81,10 @@ useEffect(() => {
       }))
     })
    
-
-   /* setSearchedItems(searchedItems.filter((item) =>{
-      return item.id !== id
-    }))
-    */
   }
 
 
+  //Deletes product from order "in-progress"
   const deleteItemFromOrder = (id) =>
   {
     setOrder(order.filter((item)=>
@@ -96,6 +93,7 @@ useEffect(() => {
     }))
   }
 
+  //Deletes order which is sended to shop
   const deleteOrder = (id) =>
   {
     axios.delete(`${adressOrder}/${id}`).then(()=>
@@ -108,6 +106,8 @@ useEffect(() => {
   
   
   }
+
+  //Adds product to order "in-progress"
 const addToOrder =(id,text,price,amount)=>
 {
 
@@ -119,7 +119,6 @@ let isAready = order.some((item)=>
 
 amount = parseInt(amount)
 if(isAready){
-console.log("Oli jo "+amount)
 
 setOrder(order.map((item)=>item.id!==id?item:{...item,amount}))
 }
@@ -129,13 +128,14 @@ setOrder(order.concat({id,text,price,amount}))
 setItems(items.map((one)=>one.id===id?{...one,amount:0}:one))
 }
 
+//Send oder "in-progerss" to shop
 const sendOrder =(name,order) =>
 {
   let number = Math.floor(Math.random() * 10000);     
   let orderObject = {
     name,
     number,
-    OrderItems:order
+    OrderItems:order    //Products in order
   }
   /*
   orderObject.OrderItems = orderObject.OrderItems.map((item)=>
@@ -145,13 +145,11 @@ const sendOrder =(name,order) =>
   */
   axios.post(adressOrder,orderObject).then((savedItems)=>
   {
-    
+    //Syncs frontend ids with database ones
     orderObject.id = savedItems.data[0].OrderId 
-    console.log(`Order ID = ${orderObject.id}`)
 
     for(let i = 0; i < savedItems.data.length;i++)
     {
-      console.log(i)
       orderObject.OrderItems[i].id =savedItems.data[i].id
     }
 
@@ -162,6 +160,7 @@ const sendOrder =(name,order) =>
     })
     */
     
+    //Moves "in-progress" order to sended ones
     setSendedOrders(sendedOrders.concat(orderObject))
     setOrder([])
     
@@ -169,8 +168,10 @@ const sendOrder =(name,order) =>
 
 }
 
+//Functio to search products on sale
 const filterFunctio = (filterText)=>
 {
+  //If empty, show all
   if(filterText.length === 0)
   {
     axios.get(adress).then(products =>
@@ -181,7 +182,7 @@ const filterFunctio = (filterText)=>
   }
   else 
   {
-  
+    //Search string between word
     axios.get(`${adress}/${filterText}`).then(products =>
     { 
       console.log(products.data)
@@ -189,20 +190,7 @@ const filterFunctio = (filterText)=>
     })
   }
 }
-  /*
-  if(filterText.length===0)
-  {
-    setSearchedItems(items)
-  }
-  else
-  {
-   let filtered = items.filter((item)=>
-   {
-     return item.text.toLowerCase().includes(filterText.toLowerCase())
-   })
   
-   setSearchedItems(filtered)
-   */
  
    const containerWholePage =
    {
@@ -224,35 +212,48 @@ const filterFunctio = (filterText)=>
     <div className="container" style={containerWholePage}>
     <div style ={containerOtherThanFooter}>
     <Header />
+
     <Router>
     <Link to="/" className="p-2">Products</Link>
     <Link to="/order" className="p-2">Order</Link>
     <Link to="/sended_orders" className="p-2">Sended orders</Link>
 
-    <Switch>
-    <Route exact path="/">
+    
+    <Switch>   
+      //Manage product, add, remove and include to order
+    <Route exact path="/">  
     <SearchItems products={items} filter={filterFunctio}/>
     <Items items={items} deleteItem={deleteItemFromItems} addToOrder={addToOrder}/>
     <AddItem onClick={addItem} />
     </Route>
+
+    //Order "in-progress"
     <Route path="/order">
     {order.length>0?
     <Order order={order} onClick={sendOrder} deleteItem={deleteItemFromOrder}/>
     :<Info text="Current order is empty"/>}  
     </Route>
+
+      //Orders that are sended to shop
     <Route path="/sended_orders">
     {sendedOrders.length > 0?  
     <ReadyOrders orders={sendedOrders} deleteOrder={deleteOrder} />
     :<Info text="There are no orders made"/>}
     </Route>
+
+      //Shows details about product
     <Route path="/Product/:id">
       <ProductDetails products={items}/>
     </Route>
+
+      //Error in adress
     <Route path="/">
       <Info text="Error in site adress"/>
     </Route>
+
     </Switch>
      </Router>
+
      </div>
      <div style={footer}>
      <Footer text="This site is made using React,Axios, Node.js(express), Sequelize and PostgreSQL." />
