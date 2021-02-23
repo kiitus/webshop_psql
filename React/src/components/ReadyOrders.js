@@ -2,6 +2,8 @@ import React from 'react'
 import ReadyOrder from "./ReadyOrder"
 
 
+//Includes orders which are sended to the shop
+
 const ReadyOrders = ({orders,deleteOrder}) => {
 
     

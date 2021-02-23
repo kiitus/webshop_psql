@@ -1,6 +1,7 @@
 import React from 'react'
 import Item from "./Item"
 
+// Shows all products which are on sale
 
 const Items = ({items,deleteItem,addToOrder}) => {
     return (

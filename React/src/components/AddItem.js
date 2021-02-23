@@ -2,6 +2,7 @@ import React from 'react'
 import {useState} from "react"
 
 //Component which is used to add item to sale
+
 const AddItem = ({onClick}) => {
     const [text, setText] = useState("")
     const [price, setPrice] = useState(1)
